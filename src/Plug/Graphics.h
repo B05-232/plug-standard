@@ -8,10 +8,27 @@
 // TODO: Implement graphics wrappers
 
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
-typedef sf::Texture      Texture;
-typedef sf::VertexArray  VertexArray;
+/**
+ * @brief 2-dimensional RGBA8 texture (GPU buffer identifier)
+ *
+ */
+typedef sf::Texture Texture;
+
+/**
+ * @brief Array of vertices (2f position, 2f tex coord, RGBA8 color) with
+ * primitive ID (stored both on GPU and CPU)
+ *
+ */
+typedef sf::VertexArray VertexArray;
+
+/**
+ * @brief Framebuffer with attached color (as Texture) and depth (as
+ * Renderbuffer) buffers
+ *
+ */
 typedef sf::RenderTarget RenderTarget;
 
 #endif
