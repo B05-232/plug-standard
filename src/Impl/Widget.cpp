@@ -1,8 +1,8 @@
 #include "Widget.h"
 
+#include "Plug/Event.h"
 #include "Plug/Graphics.h"
-#include "Plug/plug::Event.h"
-#include "Plug/plug::LayoutBox.h"
+#include "Plug/LayoutBox.h"
 
 Widget::Widget(const plug::LayoutBox& box) : box_(box.clone()) {}
 
