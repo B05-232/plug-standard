@@ -1,10 +1,10 @@
 #include "Widget.h"
 
-#include "Plug/Event.h"
 #include "Plug/Graphics.h"
-#include "Plug/LayoutBox.h"
+#include "Plug/plug::Event.h"
+#include "Plug/plug::LayoutBox.h"
 
-Widget::Widget(const LayoutBox& box) : box_(box.clone()) {}
+Widget::Widget(const plug::LayoutBox& box) : box_(box.clone()) {}
 
 Widget::Widget(const Widget& widget) : box_(nullptr) { operator=(widget); }
 
@@ -17,38 +17,38 @@ Widget& Widget::operator=(const Widget& widget)
 
 Widget::~Widget() { delete box_; }
 
-void Widget::onEvent(const Event& event, EHC& context)
+void Widget::onEvent(const plug::Event& event, plug::EHC& context)
 {
   switch (event.getType())
   {
-  case EventType::Tick:
+  case plug::EventType::Tick:
   {
-    onTick((TickEvent&)event, context);
+    onTick((plug::TickEvent&)event, context);
   }
   break;
-  case EventType::KeyboardPressed:
+  case plug::EventType::KeyboardPressed:
   {
-    onKeyboardPressed((KeyboardPressedEvent&)event, context);
+    onKeyboardPressed((plug::KeyboardPressedEvent&)event, context);
   }
   break;
-  case EventType::KeyboardReleased:
+  case plug::EventType::KeyboardReleased:
   {
-    onKeyboardReleased((KeyboardReleasedEvent&)event, context);
+    onKeyboardReleased((plug::KeyboardReleasedEvent&)event, context);
   }
   break;
-  case EventType::MousePressed:
+  case plug::EventType::MousePressed:
   {
-    onMousePressed((MousePressedEvent&)event, context);
+    onMousePressed((plug::MousePressedEvent&)event, context);
   }
   break;
-  case EventType::MouseReleased:
+  case plug::EventType::MouseReleased:
   {
-    onMouseReleased((MouseReleasedEvent&)event, context);
+    onMouseReleased((plug::MouseReleasedEvent&)event, context);
   }
   break;
-  case EventType::MouseMove:
+  case plug::EventType::MouseMove:
   {
-    onMouseMove((MouseMoveEvent&)event, context);
+    onMouseMove((plug::MouseMoveEvent&)event, context);
   }
   break;
   default:
@@ -56,18 +56,19 @@ void Widget::onEvent(const Event& event, EHC& context)
   }
 }
 
-void Widget::onParentUpdate(const LayoutBox& parent_box)
+void Widget::onParentUpdate(const plug::LayoutBox& parent_box)
 {
   box_->onParentUpdate(parent_box);
 }
 
-void Widget::setLayoutBox(const LayoutBox& box)
+void Widget::setLayoutBox(const plug::LayoutBox& box)
 {
   delete box_;
   box_ = box.clone();
 }
 
-bool Widget::covers(TransformStack& stack, const Vec2d& position) const
+bool Widget::covers(plug::TransformStack& stack,
+                    const plug::Vec2d&    position) const
 {
   //* I would be happy to provide you with the implementation that covers
   //* 99% of the use cases, but, unfortunately, we do not have `getCorner`
@@ -80,10 +81,10 @@ bool Widget::covers(TransformStack& stack, const Vec2d& position) const
   //     return false;
 
   //   // clang-format off
-  //   Vec2d tl = getCorner(TOP_LEFT,     stack);
-  //   Vec2d tr = getCorner(TOP_RIGHT,    stack);
-  //   Vec2d br = getCorner(BOTTOM_RIGHT, stack);
-  //   Vec2d bl = getCorner(BOTTOM_LEFT,  stack);
+  //   plug::Vec2d tl = getCorner(TOP_LEFT,     stack);
+  //   plug::Vec2d tr = getCorner(TOP_RIGHT,    stack);
+  //   plug::Vec2d br = getCorner(BOTTOM_RIGHT, stack);
+  //   plug::Vec2d bl = getCorner(BOTTOM_LEFT,  stack);
 
   //   bool top_check      = cross(tl - tr, screen_pos - tr) <= 0.0;
   //   bool right_check    = cross(tr - br, screen_pos - br) <= 0.0;
