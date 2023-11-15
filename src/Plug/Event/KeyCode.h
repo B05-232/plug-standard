@@ -15,6 +15,9 @@
 namespace plug
 {
 
+/**
+ * @brief Keyboard button
+ */
 enum class KeyCode
 {
   Unknown = -1,

@@ -15,6 +15,9 @@
 namespace plug
 {
 
+/**
+ * @brief Mouse button
+ */
 enum class MouseButton
 {
   Left,

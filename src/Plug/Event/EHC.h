@@ -17,11 +17,17 @@
 namespace plug
 {
 
+/**
+ * @brief Context of event handling
+ */
 struct EHC
 {
-  TransformStack& stack;
-  bool            stopped;
-  bool            overlapped;
+  TransformStack& stack; /*!< Current state of transform stack */
+
+  bool stopped; /*!< Event is intercepted and should not be handled further */
+
+  bool overlapped; /*!< Event position is contained within area managed by one
+                      of the handlers */
 };
 
 } // namespace plug
