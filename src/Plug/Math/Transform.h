@@ -1,5 +1,5 @@
-#ifndef _TRANSFORM_H_
-#define _TRANSFORM_H_
+#ifndef __PLUG_MATH_TRANSFORM_H
+#define __PLUG_MATH_TRANSFORM_H
 
 
 #include "Vec2d.h"
