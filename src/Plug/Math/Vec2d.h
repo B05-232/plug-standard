@@ -1,5 +1,5 @@
-#ifndef _VEC2D_H_
-#define _VEC2D_H_
+#ifndef __PLUG_MATH_TRANSFORM_H
+#define __PLUG_MATH_TRANSFORM_H
 
 #include <cmath>
 
@@ -9,7 +9,7 @@ namespace plug
     {
         public:
 
-        Vec2d(const double x_ = 0.0, const double y_ = 0.0): x(x_), y(y_) {}
+        explicit Vec2d(const double x_ = 0.0, const double y_ = 0.0): x(x_), y(y_) {}
 
         Vec2d(const Vec2d &src) = default; 
 
@@ -24,7 +24,6 @@ namespace plug
         {
             return sqrt(this->length2());
         }
-
 
         Vec2d& operator  = (const Vec2d &vec)
         {
@@ -87,23 +86,23 @@ namespace plug
 
     };
 
-    double dot(const Vec2d &lhs, const Vec2d &rhs)
+    inline double dot(const Vec2d &lhs, const Vec2d &rhs)
     {
         return lhs.x * rhs.x + lhs.y * rhs.y;
     }
 
-    double cross(const Vec2d &lhs, const Vec2d &rhs)
+    inline double cross(const Vec2d &lhs, const Vec2d &rhs)
     {
         return lhs.x * rhs.y - lhs.y * rhs.x;
     }
 
-    Vec2d normalize(const Vec2d &vec)
+    inline Vec2d normalize(const Vec2d &vec)
     {
         double len = vec.length();
         return vec / len;
     }
 
-    Vec2d operator + (const Vec2d &vec1, const Vec2d &vec2)
+    inline Vec2d operator + (const Vec2d &vec1, const Vec2d &vec2)
     {
         Vec2d res = vec1;
         res += vec2;
@@ -111,7 +110,7 @@ namespace plug
         return res;
     }
 
-    Vec2d operator - (const Vec2d &vec1, const Vec2d &vec2)
+    inline Vec2d operator - (const Vec2d &vec1, const Vec2d &vec2)
     {
         Vec2d res = vec1;
         res -= vec2;
@@ -119,7 +118,7 @@ namespace plug
         return res;
     }
 
-    Vec2d operator * (const Vec2d &lhs,  const Vec2d &rhs)
+    inline Vec2d operator * (const Vec2d &lhs,  const Vec2d &rhs)
     {
         Vec2d res = lhs;
         res *= rhs;
@@ -127,7 +126,7 @@ namespace plug
         return res;
     }
 
-    Vec2d operator / (const Vec2d &lhs, const Vec2d &rhs)
+    inline Vec2d operator / (const Vec2d &lhs, const Vec2d &rhs)
     {
         Vec2d res = lhs;
         res /= rhs;
@@ -135,10 +134,7 @@ namespace plug
         return res;
     }
 
-    
-  
-
-    Vec2d operator * (const Vec2d &vec, const double scale)
+    inline Vec2d operator * (const Vec2d &vec, const double scale)
     {
         Vec2d res = vec;
         res *= scale;
@@ -146,23 +142,18 @@ namespace plug
         return res;
     }
 
-    Vec2d operator * (const double scale, const Vec2d &vec)
+    inline Vec2d operator * (const double scale, const Vec2d &vec)
     {
         return operator*(vec, scale);
     }
 
-    Vec2d operator / (const Vec2d &vec, const double scale)
+    inline Vec2d operator / (const Vec2d &vec, const double scale)
     {
         Vec2d res = vec;
         res /= scale;
 
         return res;
     }
-    
-
-   
-    
-
 }
 
 #endif
