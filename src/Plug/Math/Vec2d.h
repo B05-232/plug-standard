@@ -1,5 +1,16 @@
-#ifndef __PLUG_MATH_TRANSFORM_H
-#define __PLUG_MATH_TRANSFORM_H
+/**
+ * @file TransformStack.h
+ * @author DenzeL2004 (kolomiitsev.dv@phystech.edu)
+ *
+ * @brief
+ *
+ * @version 0.1
+ * @date 2023-11-16
+ *
+ * @copyright Copyright DenzeL2004 (c) 2023
+ */
+#ifndef __PLUG_MATH_VEC2D_H
+#define __PLUG_MATH_VEC2D_H
 
 #include <cmath>
 

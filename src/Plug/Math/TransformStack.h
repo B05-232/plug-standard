@@ -40,7 +40,6 @@ namespace plug
         */
         virtual Transform top () const = 0;
 
-
         /**
          * \brief Converts local position to on-screen position using top transform
         */
