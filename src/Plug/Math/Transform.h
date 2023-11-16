@@ -51,7 +51,7 @@ namespace plug {
             /**
              * \brief Combines parent transform with this one
             */
-            Transform combine(const Transform &parent_transform) {
+            Transform combine(const Transform &parent_transform) const {
                 return Transform(
                     parent_transform.getOffset() + offset * parent_transform.getScale(),
                     scale * parent_transform.getScale()
