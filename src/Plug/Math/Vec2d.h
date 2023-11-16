@@ -3,17 +3,15 @@
 
 #include <cmath>
 
-namespace plug {
-
+namespace plug 
+{
     class Vec2d 
     {
         public:
 
-        Vec2d(const double coord_x, const double coord_y): x(coord_x), y(coord_y) {}
-        Vec2d(): x(0.0), y(0.0) {}
+        Vec2d(const double x_ = 0.0, const double y_ = 0.0): x(x_), y(y_) {}
 
         Vec2d(const Vec2d &src) = default; 
-
 
         ~Vec2d() = default;
 
