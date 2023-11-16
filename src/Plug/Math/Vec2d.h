@@ -110,7 +110,9 @@ namespace plug
     inline Vec2d normalize(const Vec2d &vec)
     {
         double len = vec.length();
-        return vec / len;
+        Vec2d res = Vec2d(vec.x / len, vec.y / len);
+
+        return res;
     }
 
     inline Vec2d operator + (const Vec2d &vec1, const Vec2d &vec2)
