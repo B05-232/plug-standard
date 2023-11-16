@@ -51,7 +51,7 @@ public:
    *
    * @return `true` if layout box size was updated, `false` otherwise
    */
-  virtual bool setSize(const math::Vec& size) = 0;
+  virtual bool setSize(const Vec2d& size) = 0;
 
   /**
    * @brief Update relative position of layout box
@@ -61,7 +61,7 @@ public:
    *
    * @return `true` if layout box position was updated, `false` otherwise
    */
-  virtual bool setPosition(const math::Point& position) = 0;
+  virtual bool setPosition(const Vec2d& position) = 0;
 
   /**
    * @brief Create deep copy of layout box
