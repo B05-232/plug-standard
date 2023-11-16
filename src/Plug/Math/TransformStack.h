@@ -12,8 +12,8 @@
 #ifndef __PLUG_MATH_TRANSFORM_STACK_H
 #define __PLUG_MATH_TRANSFORM_STACK_H
 
-#include "Vec2d.h"
-#include "Transform.h"
+#include "Plug/Math/Vec2d.h"
+#include "Plug/Math/Transform.h"
 
 namespace plug 
 {
