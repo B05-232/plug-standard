@@ -9,8 +9,8 @@
  *
  * @copyright Copyright DenzeL2004 (c) 2023
  */
-#ifndef _TRANSFORM_STACK_H_
-#define _TRANSFORM_STACK_H_
+#ifndef __PLUG_MATH_TRANSFORM_STACK_H
+#define __PLUG_MATH_TRANSFORM_STACK_H
 
 #include "Vec2d.h"
 #include "Transform.h"
@@ -25,12 +25,30 @@ namespace plug
 
         virtual ~TransformStack() = 0;
 
+        /**
+         * \brief Enter a transform to the top of the stack and pushes the new transform onto the top of the stack
+        */
         virtual void enter (const Transform &transform) = 0;
+
+        /**
+         * \brief Removes a transform from the top of the stack
+        */
         virtual void leave () = 0;
         
+        /**
+         * \brief Gets stack top transform
+        */
         virtual Transform top () const = 0;
 
+
+        /**
+         * \brief Converts local position to on-screen position using top transform
+        */
         virtual Vec2d apply     (const Vec2d &vec) const = 0; 
+
+        /**
+         * \brief Converts on-screen position to local position using top transform
+        */
         virtual Vec2d restore   (const Vec2d &vec) const = 0;
 
     };
