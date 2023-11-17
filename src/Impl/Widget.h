@@ -34,6 +34,8 @@ public:
   Widget& operator=(const Widget& widget);
   ~Widget() override;
 
+  void draw(TransformStack& stack, RenderTarget& target) override;
+
   void onEvent(const plug::Event& plug::Event, plug::EHC& context) override;
 
   void onParentUpdate(const plug::LayoutBox& parent_box) override;
