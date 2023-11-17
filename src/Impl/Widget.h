@@ -9,10 +9,18 @@
  *
  */
 
-#ifndef WIDGET_H
-#define WIDGET_H
+#ifndef __IMPL_WIDGET_H
+#define __IMPL_WIDGET_H
 
 #include "Plug/Widget.h"
+
+enum Corner
+{
+  TopLeft = 0,
+  TopRight,
+  BottomLeft,
+  BottomRight,
+}
 
 /**
  * @brief Usable widget
@@ -26,8 +34,6 @@ public:
   Widget& operator=(const Widget& widget);
   ~Widget() override;
 
-  void draw(plug::TransformStack& stack, plug::RenderTarget& target) override {}
-
   void onEvent(const plug::Event& plug::Event, plug::EHC& context) override;
 
   void onParentUpdate(const plug::LayoutBox& parent_box) override;
@@ -37,33 +43,10 @@ public:
   void                   setLayoutBox(const plug::LayoutBox& box) override;
 
 protected:
+  Vec2d getCorner(Corner corner, const TransformStack& stack) const;
+
   bool covers(plug::TransformStack& stack,
               const plug::Vec2d&    position) const override;
-  void onTick(const plug::TickEvent& event, plug::EHC& ehc) override {}
-
-  void onMouseMove(const plug::MouseMoveEvent& event, plug::EHC& ehc) override
-  {
-  }
-
-  void onMousePressed(const plug::MousePressedEvent& event,
-                      plug::EHC&                     ehc) override
-  {
-  }
-
-  void onMouseReleased(const plug::MouseReleasedEvent& event,
-                       plug::EHC&                      ehc) override
-  {
-  }
-
-  void onKeyboardPressed(const plug::KeyboardPressedEvent& event,
-                         plug::EHC&                        ehc) override
-  {
-  }
-
-  void onKeyboardReleased(const plug::KeyboardReleasedEvent& event,
-                          plug::EHC&                         ehc) override
-  {
-  }
 
 private:
   plug::LayoutBox* box_;

@@ -12,25 +12,13 @@
 #ifndef __PLUG_WIDGET_H
 #define __PLUG_WIDGET_H
 
+#include "Plug/Event.h"
 #include "Plug/Graphics.h"
+#include "Plug/LayoutBox.h"
+#include "Plug/Math.h"
 
 namespace plug
 {
-
-class LayoutBox;
-
-class EHC;
-
-class Event;
-class TickEvent;
-class MouseMoveEvent;
-class MousePressedEvent;
-class MouseReleasedEvent;
-class KeyboardPressedEvent;
-class KeyboardReleasedEvent;
-
-class Vec2d;
-class TransformStack;
 
 /**
  * @brief Interactive object with visual representation
@@ -47,7 +35,7 @@ public:
    * @param stack
    * @param target buffer which the widget will be drawn on
    */
-  virtual void draw(TransformStack& stack, RenderTarget& target) = 0;
+  virtual void draw(TransformStack& stack, RenderTarget& target) {}
 
   /**
    * @brief Handle abstract event
@@ -86,7 +74,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onTick(const TickEvent& event, EHC& ehc) = 0;
+  virtual void onTick(const TickEvent& event, EHC& ehc) {}
 
   /**
    * @brief Handle mouse movement event
@@ -94,7 +82,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMouseMove(const MouseMoveEvent& event, EHC& ehc) = 0;
+  virtual void onMouseMove(const MouseMoveEvent& event, EHC& ehc) {}
 
   /**
    * @brief Handle mouse button press
@@ -102,7 +90,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMousePressed(const MousePressedEvent& event, EHC& ehc) = 0;
+  virtual void onMousePressed(const MousePressedEvent& event, EHC& ehc) {}
 
   /**
    * @brief Handle mouse button release
@@ -110,7 +98,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMouseReleased(const MouseReleasedEvent& event, EHC& ehc) = 0;
+  virtual void onMouseReleased(const MouseReleasedEvent& event, EHC& ehc) {}
 
   /**
    * @brief handle keyboard key press
@@ -118,8 +106,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onKeyboardPressed(const KeyboardPressedEvent& event,
-                                 EHC&                        ehc) = 0;
+  virtual void onKeyboardPressed(const KeyboardPressedEvent& event, EHC& ehc) {}
 
   /**
    * @brief Handle keyboard key release
@@ -127,8 +114,9 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onKeyboardReleased(const KeyboardReleasedEvent& event,
-                                  EHC&                         ehc) = 0;
+  virtual void onKeyboardReleased(const KeyboardReleasedEvent& event, EHC& ehc)
+  {
+  }
 };
 
 } // namespace plug
