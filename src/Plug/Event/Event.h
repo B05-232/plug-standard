@@ -116,7 +116,7 @@ struct KeyboardReleasedEvent : public Event
 struct TickEvent : public Event
 {
   double delta_time; /*!< Time (in milliseconds) since last TickEvent */
-}
+};
 
 } // namespace plug
 
