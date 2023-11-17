@@ -13,8 +13,8 @@
 #define __PLUG_TOOL_TOOL_H
 
 #include "Plug/Canvas.h"
+#include "Plug/Color.h"
 #include "Plug/Plugin.h"
-#include "Plug/Tool/Color.h"
 #include "Plug/Tool/ColorPalette.h"
 #include "Plug/Tool/ControlState.h"
 

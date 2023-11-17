@@ -12,7 +12,6 @@
 #ifndef __PLUG_TOOL_H
 #define __PLUG_TOOL_H
 
-#include "Plug/Tool/Color.h"
 #include "Plug/Tool/ColorPalette.h"
 #include "Plug/Tool/ControlState.h"
 #include "Plug/Tool/Tool.h"
