@@ -12,10 +12,11 @@
 #ifndef __PLUG_GRAPHICS_VERTEX_ARRAY_H
 #define __PLUG_GRAPHICS_VERTEX_ARRAY_H
 
+#include <assert.h>
 #include <cstddef>
 
-#include "Plug/Graphics/Color.h"
 #include "Plug/Graphics/PrimitiveType.h"
+#include "Plug/Color.h"
 #include "Plug/Math.h"
 
 namespace plug
@@ -83,7 +84,7 @@ public:
    * @brief Get number of vertices in the array
    *
    */
-  void getSize(void) const;
+  size_t getSize(void) const;
 
   /**
    * @brief Resize the array to fit specified number of vertices
@@ -104,12 +105,89 @@ public:
   const Vertex& operator[](size_t index) const;
 
 private:
-  // TODO: implement (in header)
+
+  PrimitiveType m_type;
 
   Vertex* m_data;
   size_t  m_size;
   size_t  m_capacity;
 
-} // namespace plug
+};
 
+VertexArray::VertexArray(PrimitiveType type, size_t size) : m_type(type), m_size(size), m_capacity(size) {
+  m_data = new Vertex[m_size];
+}
+
+VertexArray::VertexArray(const VertexArray& other) : m_type(other.m_type), m_size(other.m_size), m_capacity(other.m_capacity) {
+  m_data = new Vertex[m_capacity];
+  for (size_t ind = 0; ind < m_size; ++ind) {
+    m_data[ind] = other.m_data[ind];
+  }
+}
+
+VertexArray& VertexArray::operator=(const VertexArray& other) {
+  delete m_data;
+
+  m_type     = other.m_type;
+  m_size     = other.m_size;
+  m_capacity = other.m_capacity;
+
+  m_data = new Vertex[m_capacity];
+  for (size_t ind = 0; ind < m_size; ++ind) {
+    m_data[ind] = other.m_data[ind];
+  }
+}
+
+VertexArray::~VertexArray(void) {
+  m_size = m_capacity = -1;
+  delete m_data;
+}
+
+PrimitveType VertexArray::getPrimitive(void) const {
+  return m_type;
+}
+
+void VertexArray::setPrimitive(PrimitiveType type) {
+  m_type = type;
+}
+
+size_t VertexArray::getSize(void) const {
+  return m_size;
+}
+
+void VertexArray::resize(size_t new_size) {
+  if (new_size <= m_capacity) {
+    m_size = new_size;
+    return;
+  }
+
+  Vertex* new_data = new Vertex[new_size];
+  for (size_t ind = 0; ind < m_size; ++ind) {
+    new_data[ind] = m_data[ind];
+  }
+  delete m_data;
+
+  m_data     = new_data;
+  m_size     = new_size;
+  m_capacity = new_size;
+}
+
+void VertexArray::appendVertex(const Vertex& vertex) {
+  if (m_size == m_capacity) resize(m_size * 1.5);
+  assert(m_size < m_capacity);
+
+  m_data[m_size++] = vertex;
+}
+
+Vertex& VertexArray::operator[](size_t index) {
+  assert(index < m_size);
+  return m_data[index];
+}
+
+const Vertex& VertexArray::operator[](size_t index) const {
+  assert(index < m_size);
+  return m_data[index];
+}
+
+} // end namespace plug
 #endif /* VertexArray.h */
