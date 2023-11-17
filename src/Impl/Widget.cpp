@@ -13,6 +13,27 @@ Widget& Widget::operator=(const Widget& widget)
 
 Widget::~Widget() { delete box_; }
 
+void Widget::draw(plug::TransformStack& stack, plug::RenderTarget& target)
+{
+  static plug::VertexArray vertices(plug::PrimitiveType::LinesStrip, 5);
+
+  // clang-format off
+  vertices[0].position = stack.apply(getCorner(Corner::TopLeft,     stack));
+  vertices[1].position = stack.apply(getCorner(Corner::TopRight,    stack));
+  vertices[2].position = stack.apply(getCorner(Corner::BottomRight, stack));
+  vertices[3].position = stack.apply(getCorner(Corner::BottomLeft,  stack));
+  // clang-format on
+
+  vertices[4] = vertices[0];
+
+  for (size_t id = 0; id < vertices.getSize(); ++id)
+  {
+    vertices[id].color = (plug::Color){.r = 255, .g = 0, .b = 255, .a = 255};
+  }
+
+  target.draw(vertices);
+}
+
 void Widget::onEvent(const plug::Event& event, plug::EHC& context)
 {
   switch (event.getType())
