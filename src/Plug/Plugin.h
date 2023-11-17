@@ -12,6 +12,8 @@
 #ifndef __PLUG_PLUGIN_H
 #define __PLUG_PLUGIN_H
 
+#include <aio.h>
+
 namespace plug
 {
 
