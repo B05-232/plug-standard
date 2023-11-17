@@ -1,3 +1,14 @@
+/**
+ * @file Widget.h
+ * @author Kudryashov Ilya (kudriashov.it@phystech.edu)
+ * @brief Usable widget template
+ * @version 0.1
+ * @date 2023-11-17
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef WIDGET_H
 #define WIDGET_H
 

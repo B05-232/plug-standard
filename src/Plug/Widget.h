@@ -1,7 +1,21 @@
-#ifndef PLUG_WIDGET_H
-#define PLUG_WIDGET_H
+/**
+ * @file Widget.h
+ * @author Kudryashov Ilya (kudriashov.it@phystech.edu)
+ * @brief Widget interface
+ * @version 0.1
+ * @date 2023-11-17
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
+#ifndef __PLUG_WIDGET_H
+#define __PLUG_WIDGET_H
 
 #include "Plug/Graphics.h"
+
+namespace plug
+{
 
 class LayoutBox;
 
@@ -116,5 +130,7 @@ protected:
   virtual void onKeyboardReleased(const KeyboardReleasedEvent& event,
                                   EHC&                         ehc) = 0;
 };
+
+} // namespace plug
 
 #endif
