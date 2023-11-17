@@ -27,7 +27,7 @@ enum class MouseButton
   XButton2,
 
   ButtonCount
-}
+};
 
 } // namespace plug
 
