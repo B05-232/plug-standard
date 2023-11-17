@@ -35,7 +35,7 @@ public:
    * @param stack
    * @param target buffer which the widget will be drawn on
    */
-  virtual void draw(TransformStack& stack, RenderTarget& target) {}
+  virtual void draw(TransformStack& stack, RenderTarget& target) = 0;
 
   /**
    * @brief Handle abstract event
