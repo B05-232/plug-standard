@@ -195,7 +195,7 @@ public:
    *
    ****************************************************************************/
 
-  virtual void updateParent(const plug::LayoutBox& parent_box) override;
+  virtual void onParentUpdate(const plug::LayoutBox& parent_box) override;
 
   virtual plug::Vec2d getSize() const override;
 

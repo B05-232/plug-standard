@@ -12,7 +12,6 @@
 #ifndef __PLUG_GRAPHICS_H
 #define __PLUG_GRAPHICS_H
 
-#include "Graphics/Color.h"
 #include "Graphics/PrimitiveType.h"
 #include "Graphics/RenderTarget.h"
 #include "Graphics/Texture.h"

@@ -22,6 +22,15 @@ namespace plug
  */
 class Color
 {
+public:
+
+  Color(void) : Color(255, 255, 255, 255) {}
+
+  Color(uint8_t red_, uint8_t green_, uint8_t blue_, uint8_t alpha_ = 255) :
+    red(red_), green(green_), blue(blue_), alpha(alpha_)
+  {
+  }
+
   union
   {
     uint8_t red; /*!< Red channel value 0 to 255 inclusive */
@@ -30,14 +39,14 @@ class Color
 
   union
   {
-    uint8_t blue; /*!< Blue channel value 0 to 255 inclusive */
-    uint8_t b;    /*!< Blue channel value 0 to 255 inclusive */
+    uint8_t green; /*!< Green channel value 0 to 255 inclusive */
+    uint8_t g;     /*!< Green channel value 0 to 255 inclusive */
   };
 
   union
   {
-    uint8_t green; /*!< Green channel value 0 to 255 inclusive */
-    uint8_t g;     /*!< Green channel value 0 to 255 inclusive */
+    uint8_t blue; /*!< Blue channel value 0 to 255 inclusive */
+    uint8_t b;    /*!< Blue channel value 0 to 255 inclusive */
   };
 
   union

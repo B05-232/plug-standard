@@ -28,7 +28,7 @@ void Widget::draw(plug::TransformStack& stack, plug::RenderTarget& target)
 
   for (size_t id = 0; id < vertices.getSize(); ++id)
   {
-    vertices[id].color = (plug::Color){.r = 255, .g = 0, .b = 255, .a = 255};
+    vertices[id].color = plug::Color(255, 0, 255, 255);
   }
 
   target.draw(vertices);
@@ -84,32 +84,34 @@ void Widget::setLayoutBox(const plug::LayoutBox& box)
   box_ = box.clone();
 }
 
-Vec2d Widget::getCorner(Corner corner, const TransformStack& stack) const
+plug::Vec2d Widget::getCorner(Corner corner, const plug::TransformStack& stack) const
 {
-  Vec2d direction = Vec2d((corner & 1) ? 0.5 : -0.5, (corner & 2) ? -0.5 : 0.5);
-  Vec2d corner    = getPosition() + getSize() * direction;
+  plug::Vec2d direction((corner & 1) ? 0.5 : -0.5, (corner & 2) ? -0.5 : 0.5);
+  plug::Vec2d corner_pos = box_->getPosition() + box_->getSize() * direction;
 
-  return stack.top().apply(corner);
+  return stack.top().apply(corner_pos);
 }
+
+static inline bool isSmall(double a) { return fabs(a) < 1e-6; }
 
 bool Widget::covers(plug::TransformStack& stack,
                     const plug::Vec2d&    position) const
 {
-  if (box_->getSize().get_x() == 0.0 || box_->getSize().get_y() == 0.0)
+  if (isSmall(box_->getSize().x) || isSmall(box_->getSize().y))
   {
     return false;
   }
 
   // clang-format off
-  plug::Vec2d tl = getCorner(TOP_LEFT,     stack);
-  plug::Vec2d tr = getCorner(TOP_RIGHT,    stack);
-  plug::Vec2d br = getCorner(BOTTOM_RIGHT, stack);
-  plug::Vec2d bl = getCorner(BOTTOM_LEFT,  stack);
+  plug::Vec2d tl = getCorner(TopLeft,     stack);
+  plug::Vec2d tr = getCorner(TopRight,    stack);
+  plug::Vec2d br = getCorner(BottomRight, stack);
+  plug::Vec2d bl = getCorner(BottomLeft,  stack);
 
-  bool top_check      = plug::cross(tl - tr, screen_pos - tr) <= 0.0;
-  bool right_check    = plug::cross(tr - br, screen_pos - br) <= 0.0;
-  bool bottom_check   = plug::cross(br - bl, screen_pos - bl) <= 0.0;
-  bool left_check     = plug::cross(bl - tl, screen_pos - tl) <= 0.0;
+  bool top_check      = plug::cross(tl - tr, position - tr) <= 0.0;
+  bool right_check    = plug::cross(tr - br, position - br) <= 0.0;
+  bool bottom_check   = plug::cross(br - bl, position - bl) <= 0.0;
+  bool left_check     = plug::cross(bl - tl, position - tl) <= 0.0;
   // clang-format on
 
   return top_check && right_check && bottom_check && left_check;

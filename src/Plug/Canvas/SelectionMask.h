@@ -1,16 +1,13 @@
 #ifndef __PLUG_CANVAS_SELECTION_MASK_H
 #define __PLUG_CANVAS_SELECTION_MASK_H
 
+#include <cstddef>
+
 namespace plug
 {
     class SelectionMask
     {
     public:
-        /**
-         * \brief Construct selection mask with width and height
-         */
-        SelectionMask (size_t width, size_t height) {}
-
         virtual ~SelectionMask() = 0;
 
         /**

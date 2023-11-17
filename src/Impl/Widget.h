@@ -20,7 +20,7 @@ enum Corner
   TopRight,
   BottomLeft,
   BottomRight,
-}
+};
 
 /**
  * @brief Usable widget
@@ -34,18 +34,18 @@ public:
   Widget& operator=(const Widget& widget);
   ~Widget() override;
 
-  void draw(TransformStack& stack, RenderTarget& target) override;
+  void draw(plug::TransformStack& stack, plug::RenderTarget& target) override;
 
-  void onEvent(const plug::Event& plug::Event, plug::EHC& context) override;
+  void onEvent(const plug::Event& event, plug::EHC& context) override;
 
   void onParentUpdate(const plug::LayoutBox& parent_box) override;
 
-  plug::LayoutBox&       getLayoutBox() override { return box_; }
-  const plug::LayoutBox& getLayoutBox() const override { return box_; }
+  plug::LayoutBox&       getLayoutBox() override { return *box_; }
+  const plug::LayoutBox& getLayoutBox() const override { return *box_; }
   void                   setLayoutBox(const plug::LayoutBox& box) override;
 
 protected:
-  Vec2d getCorner(Corner corner, const TransformStack& stack) const;
+  plug::Vec2d getCorner(Corner corner, const plug::TransformStack& stack) const;
 
   bool covers(plug::TransformStack& stack,
               const plug::Vec2d&    position) const override;

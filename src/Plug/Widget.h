@@ -27,7 +27,7 @@ namespace plug
 class Widget
 {
 public:
-  virtual ~Widget() = 0;
+  virtual ~Widget() = default;
 
   /**
    * @brief Draw widget
@@ -74,7 +74,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onTick(const TickEvent& event, EHC& ehc) {}
+  virtual void onTick(const TickEvent&, EHC&) {}
 
   /**
    * @brief Handle mouse movement event
@@ -82,7 +82,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMouseMove(const MouseMoveEvent& event, EHC& ehc) {}
+  virtual void onMouseMove(const MouseMoveEvent&, EHC&) {}
 
   /**
    * @brief Handle mouse button press
@@ -90,7 +90,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMousePressed(const MousePressedEvent& event, EHC& ehc) {}
+  virtual void onMousePressed(const MousePressedEvent&, EHC&) {}
 
   /**
    * @brief Handle mouse button release
@@ -98,7 +98,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMouseReleased(const MouseReleasedEvent& event, EHC& ehc) {}
+  virtual void onMouseReleased(const MouseReleasedEvent&, EHC&) {}
 
   /**
    * @brief handle keyboard key press
@@ -106,7 +106,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onKeyboardPressed(const KeyboardPressedEvent& event, EHC& ehc) {}
+  virtual void onKeyboardPressed(const KeyboardPressedEvent&, EHC&) {}
 
   /**
    * @brief Handle keyboard key release
@@ -114,9 +114,7 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onKeyboardReleased(const KeyboardReleasedEvent& event, EHC& ehc)
-  {
-  }
+  virtual void onKeyboardReleased(const KeyboardReleasedEvent&, EHC&) {}
 };
 
 } // namespace plug

@@ -15,6 +15,7 @@
 #include "Plug/Canvas.h"
 #include "Plug/Color.h"
 #include "Plug/Plugin.h"
+#include "Plug/Widget.h"
 #include "Plug/Tool/ColorPalette.h"
 #include "Plug/Tool/ControlState.h"
 
@@ -62,21 +63,21 @@ class Tool : public Plugin
    *
    * @param[in] state	    State of button
    */
-  virtual void onModifier1(const ContolState&) = 0;
+  virtual void onModifier1(const ControlState&) = 0;
 
   /**
    * @brief Process action on tool modifier button no. 2
    *
    * @param[in] state	    State of button
    */
-  virtual void onModifier2(const ContolState&) = 0;
+  virtual void onModifier2(const ControlState&) = 0;
 
   /**
    * @brief Process action on tool modifier button no. 3
    *
    * @param[in] state	    State of button
    */
-  virtual void onModifier3(const ContolState&) = 0;
+  virtual void onModifier3(const ControlState&) = 0;
 
   /**
    * @brief Process moving of cursor
