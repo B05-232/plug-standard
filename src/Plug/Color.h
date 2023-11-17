@@ -9,8 +9,8 @@
  *
  * @copyright Copyright MeerkatBoss (c) 2023
  */
-#ifndef __PLUG_TOOL_COLOR_H
-#define __PLUG_TOOL_COLOR_H
+#ifndef __PLUG_COLOR_H
+#define __PLUG_COLOR_H
 
 #include <cstdint>
 
