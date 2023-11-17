@@ -23,7 +23,7 @@ namespace plug
 
         TransformStack(){}
 
-        virtual ~TransformStack() = 0;
+        virtual ~TransformStack(){}
 
         /**
          * \brief Enter a transform to the top of the stack and pushes the new transform onto the top of the stack
@@ -51,6 +51,6 @@ namespace plug
         virtual Vec2d restore   (const Vec2d &vec) const = 0;
 
     };
-};
+}
 
 #endif
