@@ -14,6 +14,8 @@
 
 #include <cstddef>
 
+#include "Plug/Color.h"
+
 namespace plug
 {
 
@@ -37,7 +39,7 @@ struct Texture
    * @brief Image data
    *
    */
-  const Color const* data;
+  const Color* const data;
 
   /**
    * @brief Image width (in pixels)

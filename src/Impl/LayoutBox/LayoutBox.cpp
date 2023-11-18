@@ -46,7 +46,7 @@ static double clampToZero(double val)
   return val;
 }
 
-void LayoutBox::updateParent(const plug::LayoutBox& parent_box)
+void LayoutBox::onParentUpdate(const plug::LayoutBox& parent_box)
 {
   m_parentSize = parent_box.getSize();
 

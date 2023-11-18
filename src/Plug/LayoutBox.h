@@ -28,7 +28,7 @@ public:
    *
    * @param[in] parent_box  Parent layout box
    */
-  virtual void updateParent(const LayoutBox& parent_box) = 0;
+  virtual void onParentUpdate(const LayoutBox& parent_box) = 0;
 
   /**
    * @brief Get current size (in screen units) of layout box

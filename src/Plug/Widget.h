@@ -17,17 +17,15 @@
 #include "Plug/LayoutBox.h"
 #include "Plug/Math.h"
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Interactive object with visual representation
  *
  */
-class Widget
-{
+class Widget {
 public:
-  virtual ~Widget() = 0;
+  virtual ~Widget() = default;
 
   /**
    * @brief Draw widget
@@ -35,7 +33,7 @@ public:
    * @param stack
    * @param target buffer which the widget will be drawn on
    */
-  virtual void draw(TransformStack& stack, RenderTarget& target) = 0;
+  virtual void draw(TransformStack &stack, RenderTarget &target) = 0;
 
   /**
    * @brief Handle abstract event
@@ -43,18 +41,18 @@ public:
    * @param event
    * @param context event handling context
    */
-  virtual void onEvent(const Event& event, EHC& context) = 0;
+  virtual void onEvent(const Event &event, EHC &context) = 0;
 
   /**
    * @brief Update widget according to the parent
    *
    * @param parent_box parent layout box
    */
-  virtual void onParentUpdate(const LayoutBox& parent_box) = 0;
+  virtual void onParentUpdate(const LayoutBox &parent_box) = 0;
 
-  virtual LayoutBox&       getLayoutBox()                     = 0;
-  virtual const LayoutBox& getLayoutBox() const               = 0;
-  virtual void             setLayoutBox(const LayoutBox& box) = 0;
+  virtual LayoutBox &getLayoutBox() = 0;
+  virtual const LayoutBox &getLayoutBox() const = 0;
+  virtual void setLayoutBox(const LayoutBox &box) = 0;
 
 protected:
   /**
@@ -66,7 +64,7 @@ protected:
    * @return true if widget covers the specified position
    * @return false otherwise
    */
-  virtual bool covers(TransformStack& stack, const Vec2d& position) const = 0;
+  virtual bool covers(TransformStack &stack, const Vec2d &position) const = 0;
 
   /**
    * @brief Handle tick event (called every input tick)
@@ -74,7 +72,8 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onTick(const TickEvent& event, EHC& ehc) {}
+  virtual void onTick([[maybe_unused]] const TickEvent &event,
+                      [[maybe_unused]] EHC &context) {}
 
   /**
    * @brief Handle mouse movement event
@@ -82,7 +81,8 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMouseMove(const MouseMoveEvent& event, EHC& ehc) {}
+  virtual void onMouseMove([[maybe_unused]] const MouseMoveEvent &event,
+                           [[maybe_unused]] EHC &context) {}
 
   /**
    * @brief Handle mouse button press
@@ -90,7 +90,8 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMousePressed(const MousePressedEvent& event, EHC& ehc) {}
+  virtual void onMousePressed([[maybe_unused]] const MousePressedEvent &event,
+                              [[maybe_unused]] EHC &context) {}
 
   /**
    * @brief Handle mouse button release
@@ -98,7 +99,8 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onMouseReleased(const MouseReleasedEvent& event, EHC& ehc) {}
+  virtual void onMouseReleased([[maybe_unused]] const MouseReleasedEvent &event,
+                               [[maybe_unused]] EHC &context) {}
 
   /**
    * @brief handle keyboard key press
@@ -106,7 +108,9 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onKeyboardPressed(const KeyboardPressedEvent& event, EHC& ehc) {}
+  virtual void
+  onKeyboardPressed([[maybe_unused]] const KeyboardPressedEvent &event,
+                    [[maybe_unused]] EHC &context) {}
 
   /**
    * @brief Handle keyboard key release
@@ -114,9 +118,9 @@ protected:
    * @param event
    * @param ehc event handling context
    */
-  virtual void onKeyboardReleased(const KeyboardReleasedEvent& event, EHC& ehc)
-  {
-  }
+  virtual void
+  onKeyboardReleased([[maybe_unused]] const KeyboardReleasedEvent &event,
+                     [[maybe_unused]] EHC &context) {}
 };
 
 } // namespace plug

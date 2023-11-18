@@ -1,10 +1,11 @@
 #ifndef __PLUG_CANVAS_CANVAS_H
 #define __PLUG_CANVAS_CANVAS_H
 
+
 #include "Plug/Canvas/SelectionMask.h"
 #include "Plug/Color.h"
 #include "Plug/Math/Vec2d.h"
-#include "Plug/VertexArray.h"
+#include "Plug/Graphics.h"
 
 namespace plug
 {
