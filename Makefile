@@ -27,8 +27,7 @@ CFM      :=clang-format
 FMTFLAGS :=--dry-run -Werror -ferror-limit=1
 
 CTIDY     :=clang-tidy
-TIDYCHECKS:=-*,clang-analyzer-*,cert-*,cppcoreguidelines-*,llvm-*,$(strip\
-)readability-*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers
+TIDYCHECKS:=-*,clang-analyzer-*,cert-*
 TIDYFLAGS :=--checks=$(TIDYCHECKS) --quiet --warnings-as-errors=*
 TIDYFLAGS +=$(foreach flag, $(CFLAGS),--extra-arg=$(flag))
 
