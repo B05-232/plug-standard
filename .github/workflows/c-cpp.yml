@@ -1,19 +1,10 @@
 name: C/C++ CI
 
-on:
-  push:
-    branches:
-    - "master"
-    - "*-draft"
-  pull_request:
-    branches:
-    - "master"
-    - "*-draft"
+on: [ "pull_request" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: ConorMacBride/install-package@v1
       with:
