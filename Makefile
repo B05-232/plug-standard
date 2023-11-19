@@ -1,39 +1,7 @@
-CC:=clang++
-
-CWARN:=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wchar-subscripts\
--Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-nonliteral\
--Wformat-security -Wformat=2 -Winline -Wnon-virtual-dtor -Woverloaded-virtual\
--Wpacked -Wpointer-arith -Wredundant-decls -Wsign-promo -Wstrict-overflow=2\
--Wswitch-default -Wswitch-enum -Wundef -Wunreachable-code -Wunused\
--Wvariadic-macros -Wno-missing-field-initializers -Wno-narrowing\
--Wno-old-style-cast -Wno-varargs
-
-CDEBUG:=-D _DEBUG -ggdb3 -fcheck-new -fsized-deallocation -fstack-protector\
--fstrict-overflow -fno-omit-frame-pointer\
--fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,${strip \
-}float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,${strip \
-}null,return,returns-nonnull-attribute,shift,${strip \
-}signed-integer-overflow,undefined,unreachable,vla-bound,vptr
-
-CMACHINE:=-mavx512f -march=native -mtune=native
-
-CFLAGS:=-std=c++17 -fPIE $(CMACHINE) $(CWARN)
-BUILDTYPE?=Debug
-
-ifeq ($(BUILDTYPE), Release)
-	CFLAGS:=-O3 $(CFLAGS)
-else
-	CFLAGS:=-O0 $(CDEBUG) $(CFLAGS)
-endif
-
 PROJECT	:= plug-standard
 VERSION := 0.0.1
 
 SRCDIR	:= src
-TESTDIR := tests
-LIBDIR	:= lib
-INCDIR	:= include
-
 BUILDDIR:= build
 OBJDIR 	:= $(BUILDDIR)/obj
 BINDIR	:= $(BUILDDIR)/bin
@@ -42,69 +10,81 @@ SRCEXT	:= cpp
 HEADEXT	:= h
 OBJEXT	:= o
 
+CC:=clang++
 
+CWARN:=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wchar-subscripts\
+-Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-nonliteral\
+-Wformat-security -Wformat=2 -Winline -Wnon-virtual-dtor -Woverloaded-virtual\
+-Wpacked -Wpointer-arith -Wredundant-decls -Wsign-promo -Wstrict-overflow=2\
+-Wswitch-default -Wswitch-enum -Wundef -Wunreachable-code -Wunused\
+-Wvariadic-macros -Wno-missing-field-initializers -Wno-narrowing\
+-Wno-old-style-cast -Wno-varargs -Werror
+
+INCFLAGS:=-I$(SRCDIR)
+CFLAGS:=-std=c++17 -fPIE $(CWARN) $(INCFLAGS)
+
+CFM      :=clang-format
+FMTFLAGS :=--dry-run -Werror -ferror-limit=1
+
+CTIDY     :=clang-tidy
+TIDYCHECKS:=-*,clang-analyzer-*,cert-*,cppcoreguidelines-*,llvm-*,$(strip\
+)readability-*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers
+TIDYFLAGS :=--checks=$(TIDYCHECKS) --quiet --warnings-as-errors=*
+TIDYFLAGS +=$(foreach flag, $(CFLAGS),--extra-arg=$(flag))
+
+HEADERS := $(shell find $(SRCDIR) -type f -name "*.$(HEADEXT)")
 SOURCES := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
-TESTS	:= $(shell find $(TESTDIR) -type f -name "*$(SRCEXT)")
-LIBS	:= $(patsubst lib%.a, %, $(shell find $(LIBDIR) -type f))
 OBJECTS	:= $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
-TESTOBJS:= $(patsubst %,$(OBJDIR)/%,$(TESTS:.$(SRCEXT)=.$(OBJEXT)))
 
-INCFLAGS:= -I$(SRCDIR) -I$(INCDIR)
-LFLAGS  := -Llib/ $(addprefix -l, $(LIBS))\
-			-lsfml-graphics -lsfml-window -lsfml-system
-
-all: $(BINDIR)/$(PROJECT)
-
-remake: cleaner all
+CHECKDIR :=$(BUILDDIR)/check
+CHECKMAIN:=$(CHECKDIR)/main.cpp
+CHECKFILE:=$(CHECKDIR)/check.cpp
+CHECKINC :=$(patsubst $(SRCDIR)/%,%,$(HEADERS))
 
 init:
-	@mkdir -p $(SRCDIR)
-	@mkdir -p $(INCDIR)
-	@mkdir -p $(LIBDIR)
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(BINDIR)
+	@mkdir -p $(CHECKDIR)
 
-build_lib: $(OBJECTS)
-	@mkdir -p dist/include
-	@mkdir -p dist/lib
-	@ar rcs dist/lib/lib$(PROJECT).a $^
-	@find $(SRCDIR) -type f -name *.$(HEADEXT) -exec\
-		bash -c 'cp -p --parents {} dist/include' \;
-	@tar -czf dist/$(PROJECT)-$(VERSION)-linux-x86_64.tar.gz dist/*
-	@rm -r dist/include
-	@rm -r dist/lib
+all: $(OBJECTS)
 
-# Build test objects
-$(OBJDIR)/$(TESTDIR)/%.$(OBJEXT): $(TESTDIR)/%.$(SRCEXT)
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCFLAGS) -I$(TESTDIR) -c $< -o $@
+remake: clean all
 
 # Build source objects
 $(OBJDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@echo -n "Building $@ ... "
 	@mkdir -p $(dir $@)
+	@$(CTIDY) $(TIDYFLAGS) $<
 	@$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
+	@echo done!
 
-# Build project binary
-$(BINDIR)/$(PROJECT): $(OBJECTS)
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $^ $(LFLAGS) -o $(BINDIR)/$(PROJECT)
+$(CHECKMAIN): init
+	@echo -n "Creating main checker file '$@' ... "
+	@$(foreach inc, $(CHECKINC), echo \#include \"$(inc)\" >> $@;)
+	@echo "int main() { int* a = new int[20]; return main(); }" >> $@
+	@echo done!
 
-# Build test binary
-$(BINDIR)/$(PROJECT)_tests: $(filter-out %/main.o,$(OBJECTS)) $(TESTOBJS)
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $^ $(LFLAGS) -o $(BINDIR)/$(PROJECT)_tests
+$(CHECKFILE): init
+	@echo -n "Creating checker file '$@' ... "
+	@$(foreach inc, $(CHECKINC), echo \#include \"$(inc)\" >> $@;)
+	@echo done!
+
+
+compile_check: $(CHECKFILE) $(CHECKMAIN) $(OBJECTS)
+	@echo "Checking compilation..."
+	@$(CTIDY) $(TIDYFLAGS) $(CHECKFILE) $(CHECKMAIN)
+	@$(CC) $(CFLAGS) $(INCFLAGS) $^ -o /dev/null
+	@rm $(CHECKFILE) $(CHECKMAIN)
+	@echo "Project compiled successfully"
+
+format_check:
+	@$(foreach header, $(HEADERS),\
+		$(CFORMAT) $(FMTFLAGS) $(header);)
+
+check: compile_check format_check
 
 clean:
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIR) $(BINDIR) $(CHECKDIR)
 
-cleaner: clean
-	@rm -rf $(BINDIR)
-
-run: $(BINDIR)/$(PROJECT)
-	$(BINDIR)/$(PROJECT) $(ARGS)
-
-test: $(BINDIR)/$(PROJECT)_tests
-	 $(BINDIR)/$(PROJECT)_tests $(ARGS)
-
-.PHONY: all remake clean cleaner
+.PHONY: all remake clean cleaner check compile_check format_check init
 
