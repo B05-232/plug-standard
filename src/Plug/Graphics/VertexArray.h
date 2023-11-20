@@ -12,7 +12,7 @@
 #ifndef __PLUG_GRAPHICS_VERTEX_ARRAY_H
 #define __PLUG_GRAPHICS_VERTEX_ARRAY_H
 
-#include <assert.h>
+#include <cassert>
 #include <cstddef>
 
 #include "Plug/Graphics/PrimitiveType.h"
@@ -114,8 +114,8 @@ private:
 
 };
 
-inline VertexArray::VertexArray(PrimitiveType type, size_t size) : m_type(type), m_size(size), m_capacity(size) {
-  m_data = new Vertex[m_size];
+inline VertexArray::VertexArray(PrimitiveType type, size_t size = 1) : m_type(type), m_size(0), m_capacity(std::max(size, 1ul)) {
+  m_data = new Vertex[m_capacity];
 }
 
 inline VertexArray::VertexArray(const VertexArray& other) : m_type(other.m_type), m_size(other.m_size), m_capacity(other.m_capacity) {
@@ -159,7 +159,6 @@ inline size_t VertexArray::getSize(void) const {
 
 inline void VertexArray::resize(size_t new_size) {
   if (new_size <= m_capacity) {
-    m_size = new_size;
     return;
   }
 
@@ -170,12 +169,11 @@ inline void VertexArray::resize(size_t new_size) {
   delete m_data;
 
   m_data     = new_data;
-  m_size     = new_size;
   m_capacity = new_size;
 }
 
 inline void VertexArray::appendVertex(const Vertex& vertex) {
-  if (m_size == m_capacity) resize(m_size * 1.5);
+  if (m_size == m_capacity) resize(m_capacity * 2);
   assert(m_size < m_capacity);
 
   m_data[m_size++] = vertex;
