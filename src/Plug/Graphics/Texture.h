@@ -39,7 +39,7 @@ struct Texture
    * @brief Image data
    *
    */
-  const Color* data;
+  Color* const data;
 
   /**
    * @brief Image width (in pixels)
