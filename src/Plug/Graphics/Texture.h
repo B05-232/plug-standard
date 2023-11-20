@@ -25,7 +25,7 @@ namespace plug
  */
 struct Texture
 {
-  Texture(size_t width, size_t height, const Color* data) :
+  Texture(size_t width, size_t height, Color* data) :
       data(data), width(width), height(height)
   {
   }
