@@ -114,7 +114,7 @@ private:
 
 };
 
-inline VertexArray::VertexArray(PrimitiveType type, size_t size = 1) : m_type(type), m_size(0), m_capacity(std::max(size, 1ul)) {
+inline VertexArray::VertexArray(PrimitiveType type, size_t size = 0) : m_type(type), m_size(size), m_capacity(std::max(size, 1ul)) {
   m_data = new Vertex[m_capacity];
 }
 
@@ -180,6 +180,7 @@ inline void VertexArray::appendVertex(const Vertex& vertex) {
 }
 
 inline Vertex& VertexArray::operator[](size_t index) {
+  // printf("%u %u\n", index, m_size);
   assert(index < m_size);
   return m_data[index];
 }
