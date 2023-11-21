@@ -112,6 +112,7 @@ private:
   size_t  m_size;
   size_t  m_capacity;
 
+  void reserve(size_t new_capacity);
 };
 
 inline VertexArray::VertexArray(PrimitiveType type, size_t size = 0) : m_type(type), m_size(size), m_capacity(std::max(size, 1ul)) {
@@ -142,7 +143,7 @@ inline VertexArray& VertexArray::operator=(const VertexArray& other) {
 
 inline VertexArray::~VertexArray(void) {
   m_size = m_capacity = -1;
-  delete m_data;
+  delete[] m_data;
 }
 
 inline PrimitiveType VertexArray::getPrimitive(void) const {
@@ -159,28 +160,22 @@ inline size_t VertexArray::getSize(void) const {
 
 inline void VertexArray::resize(size_t new_size) {
   if (new_size <= m_capacity) {
+    m_size = new_size;
     return;
   }
 
-  Vertex* new_data = new Vertex[new_size];
-  for (size_t ind = 0; ind < m_size; ++ind) {
-    new_data[ind] = m_data[ind];
-  }
-  delete m_data;
-
-  m_data     = new_data;
-  m_capacity = new_size;
+  reserve(new_size);
+  m_size = new_size;
 }
 
 inline void VertexArray::appendVertex(const Vertex& vertex) {
-  if (m_size == m_capacity) resize(m_capacity * 2);
+  if (m_size == m_capacity) { reserve(m_capacity * 2); }
   assert(m_size < m_capacity);
 
   m_data[m_size++] = vertex;
 }
 
 inline Vertex& VertexArray::operator[](size_t index) {
-  // printf("%u %u\n", index, m_size);
   assert(index < m_size);
   return m_data[index];
 }
@@ -188,6 +183,19 @@ inline Vertex& VertexArray::operator[](size_t index) {
 inline const Vertex& VertexArray::operator[](size_t index) const {
   assert(index < m_size);
   return m_data[index];
+}
+
+inline void VertexArray::reserve(size_t new_capacity) {
+  assert(new_capacity > m_capacity);
+
+  Vertex* new_data = new Vertex[new_capacity];
+  for (size_t ind = 0; ind < m_size; ++ind) {
+    new_data[ind] = m_data[ind];
+  }
+  delete[] m_data;
+
+  m_data     = new_data;
+  m_capacity = new_capacity;
 }
 
 } // end namespace plug
