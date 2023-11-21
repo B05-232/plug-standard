@@ -14,3 +14,10 @@ jobs:
       run: make
     - name: make check
       run: make check
+    - name: Add commit status
+      uses: octodemo-resources/github-commit-status@v1
+        with:
+          context: build_results
+          state: success
+          description: Build completed sucessfully
+          target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
