@@ -23,7 +23,6 @@ namespace plug
 class ColorPalette
 {
 public:
-
   /**
    * @brief Get active foreground color
    *
@@ -43,14 +42,14 @@ public:
    *
    * @param[in] new_fg_color  New value of background color
    */
-  void  setFGColor(Color new_fg_color);
+  void setFGColor(Color new_fg_color);
 
   /**
    * @brief Set new background color
    *
    * @param[in] new_bg_color  New value of background color
    */
-  void  setBGColor(Color new_bg_color);
+  void setBGColor(Color new_bg_color);
 };
 
 } // namespace plug
