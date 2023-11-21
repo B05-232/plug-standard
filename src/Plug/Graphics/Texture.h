@@ -31,11 +31,7 @@ struct Texture
   }
 
   Texture(size_t a_width, size_t a_height) :
-<<<<<<< HEAD
       data((Color*)new Color[a_width * a_height]), width(a_width), height(a_height)
-=======
-      data((Color*)new Color[width * height]), width(a_width), height(a_height)
->>>>>>> 5960c30b6e4e3ef64b59a6df8187d0e1fcb37841
   {
   }
 
