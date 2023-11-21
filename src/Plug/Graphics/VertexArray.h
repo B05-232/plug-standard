@@ -114,7 +114,8 @@ private:
   void reserve(size_t new_capacity);
 };
 
-inline VertexArray::VertexArray(PrimitiveType type, size_t size = 0) : m_type(type), m_size(size), m_capacity(std::max(size, 1ul)) {
+inline VertexArray::VertexArray(PrimitiveType type, size_t size = 0) : m_type(type), m_size(size), m_capacity(std::max(size, 1ul))
+{
   m_data = new Vertex[m_capacity];
 }
 
@@ -130,6 +131,8 @@ inline VertexArray::VertexArray(const VertexArray& other) :
 
 inline VertexArray& VertexArray::operator=(const VertexArray& other)
 {
+  if (this == &other) { return *this; }
+
   delete m_data;
 
   m_type     = other.m_type;
@@ -169,7 +172,8 @@ inline void VertexArray::resize(size_t new_size)
   m_size = new_size;
 }
 
-inline void VertexArray::appendVertex(const Vertex& vertex) {
+inline void VertexArray::appendVertex(const Vertex& vertex)
+{
   if (m_size == m_capacity) { reserve(m_capacity * 2); }
   assert(m_size < m_capacity);
 
@@ -188,7 +192,8 @@ inline const Vertex& VertexArray::operator[](size_t index) const
   return m_data[index];
 }
 
-inline void VertexArray::reserve(size_t new_capacity) {
+inline void VertexArray::reserve(size_t new_capacity)
+{
   assert(new_capacity > m_capacity);
 
   Vertex* new_data = new Vertex[new_capacity];
