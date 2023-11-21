@@ -1,4 +1,4 @@
-#include "Impl/RenderTarget/RenderWindow/RenderWindow.h"
+#include "RenderWindow.h"
 #include "Impl/Graphics/RenderTarget/RenderTarget.h"
 
 void RenderWindow::draw(const plug::VertexArray &array)
