@@ -29,7 +29,7 @@ enum class State
  */
 struct ControlState
 {
-  State state;  /*!< State of tool control button */
+  State state; /*!< State of tool control button */
 };
 
 } // namespace plug

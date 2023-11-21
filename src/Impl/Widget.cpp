@@ -6,6 +6,11 @@ Widget::Widget(const Widget& widget) : box_(widget.getLayoutBox().clone()) {}
 
 Widget& Widget::operator=(const Widget& widget)
 {
+  if (this == &widget)
+  {
+    return *this;
+  }
+
   delete box_;
   box_ = widget.box_->clone();
   return *this;
@@ -84,7 +89,8 @@ void Widget::setLayoutBox(const plug::LayoutBox& box)
   box_ = box.clone();
 }
 
-plug::Vec2d Widget::getCorner(Corner corner, const plug::TransformStack& stack) const
+plug::Vec2d Widget::getCorner(Corner                      corner,
+                              const plug::TransformStack& stack) const
 {
   plug::Vec2d direction((corner & 1) ? 0.5 : -0.5, (corner & 2) ? -0.5 : 0.5);
   plug::Vec2d corner_pos = box_->getPosition() + box_->getSize() * direction;
