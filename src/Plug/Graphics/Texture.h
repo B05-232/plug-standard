@@ -25,13 +25,13 @@ namespace plug
  */
 struct Texture
 {
-  Texture(size_t width, size_t height, const Color* data) :
-      data(data), width(width), height(height)
+  Texture(size_t a_width, size_t a_height, const Color* a_data) :
+      data(a_data), width(a_width), height(a_height)
   {
   }
 
-  Texture(size_t width, size_t height) :
-      data((Color*)new Color[width * height]), width(width), height(height)
+  Texture(size_t a_width, size_t a_height) :
+      data((Color*)new Color[a_width * a_height]), width(a_width), height(a_height)
   {
   }
 
