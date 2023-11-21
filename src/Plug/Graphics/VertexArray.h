@@ -15,8 +15,8 @@
 #include <cassert>
 #include <cstddef>
 
-#include "Plug/Graphics/PrimitiveType.h"
 #include "Plug/Color.h"
+#include "Plug/Graphics/PrimitiveType.h"
 #include "Plug/Math.h"
 
 namespace plug
@@ -105,7 +105,6 @@ public:
   const Vertex& operator[](size_t index) const;
 
 private:
-
   PrimitiveType m_type;
 
   Vertex* m_data;
@@ -119,14 +118,18 @@ inline VertexArray::VertexArray(PrimitiveType type, size_t size = 0) : m_type(ty
   m_data = new Vertex[m_capacity];
 }
 
-inline VertexArray::VertexArray(const VertexArray& other) : m_type(other.m_type), m_size(other.m_size), m_capacity(other.m_capacity) {
+inline VertexArray::VertexArray(const VertexArray& other) :
+    m_type(other.m_type), m_size(other.m_size), m_capacity(other.m_capacity)
+{
   m_data = new Vertex[m_capacity];
-  for (size_t ind = 0; ind < m_size; ++ind) {
+  for (size_t ind = 0; ind < m_size; ++ind)
+  {
     m_data[ind] = other.m_data[ind];
   }
 }
 
-inline VertexArray& VertexArray::operator=(const VertexArray& other) {
+inline VertexArray& VertexArray::operator=(const VertexArray& other)
+{
   delete m_data;
 
   m_type     = other.m_type;
@@ -134,32 +137,30 @@ inline VertexArray& VertexArray::operator=(const VertexArray& other) {
   m_capacity = other.m_capacity;
 
   m_data = new Vertex[m_capacity];
-  for (size_t ind = 0; ind < m_size; ++ind) {
+  for (size_t ind = 0; ind < m_size; ++ind)
+  {
     m_data[ind] = other.m_data[ind];
   }
 
   return *this;
 }
 
-inline VertexArray::~VertexArray(void) {
+inline VertexArray::~VertexArray(void)
+{
   m_size = m_capacity = -1;
   delete[] m_data;
 }
 
-inline PrimitiveType VertexArray::getPrimitive(void) const {
-  return m_type;
-}
+inline PrimitiveType VertexArray::getPrimitive(void) const { return m_type; }
 
-inline void VertexArray::setPrimitive(PrimitiveType type) {
-  m_type = type;
-}
+inline void VertexArray::setPrimitive(PrimitiveType type) { m_type = type; }
 
-inline size_t VertexArray::getSize(void) const {
-  return m_size;
-}
+inline size_t VertexArray::getSize(void) const { return m_size; }
 
-inline void VertexArray::resize(size_t new_size) {
-  if (new_size <= m_capacity) {
+inline void VertexArray::resize(size_t new_size)
+{
+  if (new_size <= m_capacity)
+  {
     m_size = new_size;
     return;
   }
@@ -175,12 +176,14 @@ inline void VertexArray::appendVertex(const Vertex& vertex) {
   m_data[m_size++] = vertex;
 }
 
-inline Vertex& VertexArray::operator[](size_t index) {
+inline Vertex& VertexArray::operator[](size_t index)
+{
   assert(index < m_size);
   return m_data[index];
 }
 
-inline const Vertex& VertexArray::operator[](size_t index) const {
+inline const Vertex& VertexArray::operator[](size_t index) const
+{
   assert(index < m_size);
   return m_data[index];
 }

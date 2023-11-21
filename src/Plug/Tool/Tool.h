@@ -15,9 +15,9 @@
 #include "Plug/Canvas.h"
 #include "Plug/Color.h"
 #include "Plug/Plugin.h"
-#include "Plug/Widget.h"
 #include "Plug/Tool/ColorPalette.h"
 #include "Plug/Tool/ControlState.h"
+#include "Plug/Widget.h"
 
 namespace plug
 {

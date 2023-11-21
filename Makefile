@@ -23,7 +23,7 @@ CWARN:=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wchar-subscripts\
 INCFLAGS:=-I$(SRCDIR)
 CFLAGS:=-std=c++17 -fPIE $(CWARN) $(INCFLAGS)
 
-CFM      :=clang-format
+CFORMAT  :=clang-format
 FMTFLAGS :=--dry-run -Werror -ferror-limit=1
 
 CTIDY     :=clang-tidy
@@ -60,7 +60,7 @@ $(OBJDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 $(CHECKMAIN): init
 	@echo -n "Creating main checker file '$@' ... "
 	@$(foreach inc, $(CHECKINC), echo \#include \"$(inc)\" >> $@;)
-	@echo "int main() { int* a = new int[20]; return main(); }" >> $@
+	@echo "int main() { return 0; }" >> $@
 	@echo done!
 
 $(CHECKFILE): init
@@ -76,11 +76,19 @@ compile_check: $(CHECKFILE) $(CHECKMAIN) $(OBJECTS)
 	@rm $(CHECKFILE) $(CHECKMAIN)
 	@echo "Project compiled successfully"
 
+format:
+	@$(foreach header, $(HEADERS),\
+		$(CFORMAT) -i $(header);)
+	@$(foreach source, $(SOURCES),\
+		$(CFORMAT) -i $(source);)
+
 format_check:
 	@$(foreach header, $(HEADERS),\
 		$(CFORMAT) $(FMTFLAGS) $(header);)
+	@$(foreach source, $(SOURCES),\
+		$(CFORMAT) $(FMTFLAGS) $(source);)
 
-check: compile_check format_check
+check: clean compile_check format_check
 
 clean:
 	@rm -rf $(OBJDIR) $(BINDIR) $(CHECKDIR)

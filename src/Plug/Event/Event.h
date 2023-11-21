@@ -58,10 +58,10 @@ private:
  */
 struct MouseMoveEvent : public Event
 {
-  bool shift; /*!< Shift is pressed */
-  bool ctrl;  /*!< Ctrl is pressed */
-  bool alt;   /*!< Alt is pressed */
-  Vec2d pos;  /*!< New mouse position */
+  bool  shift; /*!< Shift is pressed */
+  bool  ctrl;  /*!< Ctrl is pressed */
+  bool  alt;   /*!< Alt is pressed */
+  Vec2d pos;   /*!< New mouse position */
 };
 
 /**
@@ -69,11 +69,11 @@ struct MouseMoveEvent : public Event
  */
 struct MousePressedEvent : public Event
 {
-  MouseButton button_id;  /*!< Pressed button */
-  bool shift;             /*!< Shift is pressed */
-  bool ctrl;              /*!< Ctrl is pressed */
-  bool alt;               /*!< Alt is pressed */
-  Vec2d pos;              /*!< Mouse position when pressed */
+  MouseButton button_id; /*!< Pressed button */
+  bool        shift;     /*!< Shift is pressed */
+  bool        ctrl;      /*!< Ctrl is pressed */
+  bool        alt;       /*!< Alt is pressed */
+  Vec2d       pos;       /*!< Mouse position when pressed */
 };
 
 /**
@@ -81,11 +81,11 @@ struct MousePressedEvent : public Event
  */
 struct MouseReleasedEvent : public Event
 {
-  MouseButton button_id;  /*!< Released button */
-  bool shift;             /*!< Shift is pressed */
-  bool ctrl;              /*!< Ctrl is pressed */
-  bool alt;               /*!< Alt is pressed */
-  Vec2d pos;              /*!< Mouse position when released */
+  MouseButton button_id; /*!< Released button */
+  bool        shift;     /*!< Shift is pressed */
+  bool        ctrl;      /*!< Ctrl is pressed */
+  bool        alt;       /*!< Alt is pressed */
+  Vec2d       pos;       /*!< Mouse position when released */
 };
 
 /**
@@ -94,9 +94,9 @@ struct MouseReleasedEvent : public Event
 struct KeyboardPressedEvent : public Event
 {
   KeyCode key_id; /*!< Pressed key */
-  bool shift;     /*!< Shift is pressed */
-  bool ctrl;      /*!< Ctrl is pressed */
-  bool alt;       /*!< Alt is pressed */
+  bool    shift;  /*!< Shift is pressed */
+  bool    ctrl;   /*!< Ctrl is pressed */
+  bool    alt;    /*!< Alt is pressed */
 };
 
 /**
@@ -105,9 +105,9 @@ struct KeyboardPressedEvent : public Event
 struct KeyboardReleasedEvent : public Event
 {
   KeyCode key_id; /*!< Released key */
-  bool shift;     /*!< Shift is pressed */
-  bool ctrl;      /*!< Ctrl is pressed */
-  bool alt;       /*!< Alt is pressed */
+  bool    shift;  /*!< Shift is pressed */
+  bool    ctrl;   /*!< Ctrl is pressed */
+  bool    alt;    /*!< Alt is pressed */
 };
 
 /**
