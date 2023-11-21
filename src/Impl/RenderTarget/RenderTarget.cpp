@@ -1,4 +1,4 @@
-#include "RenderTarget.h"
+#include "Impl/RenderTarget/RenderTarget.h"
 
 sf::Color getSFMLColor(const plug::Color &plug_color)
 {

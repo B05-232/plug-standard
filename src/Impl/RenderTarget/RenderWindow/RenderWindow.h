@@ -30,7 +30,7 @@ class RenderWindow : public plug::RenderTarget
 
         void display(void);
 
-        Vec2d getMouseCoord(void) const;
+        plug::Vec2d getMouseCoord(void) const;
 
     private:
     

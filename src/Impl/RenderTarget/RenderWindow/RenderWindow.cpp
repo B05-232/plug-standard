@@ -1,7 +1,5 @@
-#include "RenderWindow.h"
-
+#include "Impl/RenderTarget/RenderWindow/RenderWindow.h"
 #include "Impl/Graphics/RenderTarget/RenderTarget.h"
-//====================================================================================
 
 void RenderWindow::draw(const plug::VertexArray &array)
 {
@@ -53,10 +51,8 @@ void RenderWindow::display(void)
     window_.display();
 }
 
-Vec2d RenderWindow::getMouseCoord(void) const
+plug::Vec2d RenderWindow::getMouseCoord(void) const
 {
     sf::Mouse mouse;
-    return Vec2d((double)mouse.getPosition(window_).x, (double)mouse.getPosition(window_).y);
+    return plug::Vec2d((double)mouse.getPosition(window_).x, (double)mouse.getPosition(window_).y);
 }
-
-//====================================================================================
