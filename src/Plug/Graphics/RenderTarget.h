@@ -51,11 +51,12 @@ public:
   virtual void clear(Color color) = 0;
 
   /**
-   * @brief Get OpenGL identifier of the related framebuffer
+   * @brief Prepare current render target for rendering raw OpenGL
    *
-   * @return unsigned
+   * @param[in] active true: bind related framebuffer and push GL states, false:
+   * pop saved GL states
    */
-  virtual unsigned getNativeHandle(void) const = 0;
+  virtual void setActive(bool active) = 0;
 };
 
 } // namespace plug
