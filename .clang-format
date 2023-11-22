@@ -1,23 +1,2 @@
 Language: Cpp
 BasedOnStyle: LLVM
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
-AlignConsecutiveMacros: true
-AlignEscapedNewlines: Right
-AlignOperands: true
-AlignTrailingComments: true
-AlwaysBreakTemplateDeclarations: Yes
-BreakBeforeBraces: Allman
-BreakConstructorInitializers: AfterColon
-ConstructorInitializerAllOnOneLineOrOnePerLine: true
-FixNamespaceComments: true
-IncludeBlocks: Regroup
-IncludeCategories: 
-  - Regex: '<[[:alnum:].]+>'
-    Priority: 1
-  - Regex: '".*"'
-    Priority: 2
-PointerAlignment: Left
-ReflowComments: true
-SortIncludes: true
-MaxEmptyLinesToKeep: 1

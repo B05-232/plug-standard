@@ -14,38 +14,35 @@
 
 #include <cstddef>
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Interface ids for predefined interfaces
  */
-enum class PluginGuid
-{
+enum class PluginGuid {
   Plugin = 0, /*!< Default plugin interface */
-  Tool   = 1, /*!< Tool interface */
+  Tool = 1,   /*!< Tool interface */
   Filter = 2, /*!< Filter interface */
 };
 
 /**
  * @brief Common plugin data
  */
-class PluginData
-{
+class PluginData {
 public:
   /**
    * @brief Retrieve plugin name
    *
    * @return Plugin name as C-string
    */
-  virtual const char* getName(void) const = 0;
+  virtual const char *getName(void) const = 0;
 
   /**
    * @brief Retrieve path to plugin icon texture file
    *
    * @return Path to texture file as C-string
    */
-  virtual const char* getTexturePath(void) const = 0;
+  virtual const char *getTexturePath(void) const = 0;
 
   virtual ~PluginData() = default;
 };
@@ -53,8 +50,7 @@ public:
 /**
  * @brief Default interface for all plugins
  */
-class Plugin
-{
+class Plugin {
 public:
   /**
    * @brief Retrive some other interface implemented by plugin
@@ -64,7 +60,7 @@ public:
    * @return If requested interface is implemented, return object implementing
    *         this interface. Otherwise, return `nullptr`
    */
-  virtual Plugin* tryGetInterface(size_t interface_id) = 0;
+  virtual Plugin *tryGetInterface(size_t interface_id) = 0;
 
   /**
    * @brief Increment reference counter on interface instance
@@ -82,7 +78,7 @@ public:
    *
    * @return Pointer to data specific to interface
    */
-  virtual const PluginData* getPluginData(void) const = 0;
+  virtual const PluginData *getPluginData(void) const = 0;
 
   virtual ~Plugin() = default;
 };

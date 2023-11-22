@@ -1,13 +1,11 @@
 #include "Widget.h"
 
-Widget::Widget(const plug::LayoutBox& box) : box_(box.clone()) {}
+Widget::Widget(const plug::LayoutBox &box) : box_(box.clone()) {}
 
-Widget::Widget(const Widget& widget) : box_(widget.getLayoutBox().clone()) {}
+Widget::Widget(const Widget &widget) : box_(widget.getLayoutBox().clone()) {}
 
-Widget& Widget::operator=(const Widget& widget)
-{
-  if (this == &widget)
-  {
+Widget &Widget::operator=(const Widget &widget) {
+  if (this == &widget) {
     return *this;
   }
 
@@ -18,8 +16,7 @@ Widget& Widget::operator=(const Widget& widget)
 
 Widget::~Widget() { delete box_; }
 
-void Widget::draw(plug::TransformStack& stack, plug::RenderTarget& target)
-{
+void Widget::draw(plug::TransformStack &stack, plug::RenderTarget &target) {
   static plug::VertexArray vertices(plug::PrimitiveType::LinesStrip, 5);
 
   // clang-format off
@@ -31,67 +28,49 @@ void Widget::draw(plug::TransformStack& stack, plug::RenderTarget& target)
 
   vertices[4] = vertices[0];
 
-  for (size_t id = 0; id < vertices.getSize(); ++id)
-  {
+  for (size_t id = 0; id < vertices.getSize(); ++id) {
     vertices[id].color = plug::Color(255, 0, 255, 255);
   }
 
   target.draw(vertices);
 }
 
-void Widget::onEvent(const plug::Event& event, plug::EHC& context)
-{
-  switch (event.getType())
-  {
-  case plug::EventType::Tick:
-  {
-    onTick((const plug::TickEvent&)event, context);
-  }
-  break;
-  case plug::EventType::KeyboardPressed:
-  {
-    onKeyboardPressed((const plug::KeyboardPressedEvent&)event, context);
-  }
-  break;
-  case plug::EventType::KeyboardReleased:
-  {
-    onKeyboardReleased((const plug::KeyboardReleasedEvent&)event, context);
-  }
-  break;
-  case plug::EventType::MousePressed:
-  {
-    onMousePressed((const plug::MousePressedEvent&)event, context);
-  }
-  break;
-  case plug::EventType::MouseReleased:
-  {
-    onMouseReleased((const plug::MouseReleasedEvent&)event, context);
-  }
-  break;
-  case plug::EventType::MouseMove:
-  {
-    onMouseMove((const plug::MouseMoveEvent&)event, context);
-  }
-  break;
+void Widget::onEvent(const plug::Event &event, plug::EHC &context) {
+  switch (event.getType()) {
+  case plug::EventType::Tick: {
+    onTick((const plug::TickEvent &)event, context);
+  } break;
+  case plug::EventType::KeyboardPressed: {
+    onKeyboardPressed((const plug::KeyboardPressedEvent &)event, context);
+  } break;
+  case plug::EventType::KeyboardReleased: {
+    onKeyboardReleased((const plug::KeyboardReleasedEvent &)event, context);
+  } break;
+  case plug::EventType::MousePressed: {
+    onMousePressed((const plug::MousePressedEvent &)event, context);
+  } break;
+  case plug::EventType::MouseReleased: {
+    onMouseReleased((const plug::MouseReleasedEvent &)event, context);
+  } break;
+  case plug::EventType::MouseMove: {
+    onMouseMove((const plug::MouseMoveEvent &)event, context);
+  } break;
   default:
     break;
   }
 }
 
-void Widget::onParentUpdate(const plug::LayoutBox& parent_box)
-{
+void Widget::onParentUpdate(const plug::LayoutBox &parent_box) {
   box_->onParentUpdate(parent_box);
 }
 
-void Widget::setLayoutBox(const plug::LayoutBox& box)
-{
+void Widget::setLayoutBox(const plug::LayoutBox &box) {
   delete box_;
   box_ = box.clone();
 }
 
-plug::Vec2d Widget::getCorner(Corner                      corner,
-                              const plug::TransformStack& stack) const
-{
+plug::Vec2d Widget::getCorner(Corner corner,
+                              const plug::TransformStack &stack) const {
   plug::Vec2d direction((corner & 1) ? 0.5 : -0.5, (corner & 2) ? -0.5 : 0.5);
   plug::Vec2d corner_pos = box_->getPosition() + box_->getSize() * direction;
 
@@ -100,11 +79,9 @@ plug::Vec2d Widget::getCorner(Corner                      corner,
 
 static inline bool isSmall(double a) { return fabs(a) < 1e-6; }
 
-bool Widget::covers(plug::TransformStack& stack,
-                    const plug::Vec2d&    position) const
-{
-  if (isSmall(box_->getSize().x) || isSmall(box_->getSize().y))
-  {
+bool Widget::covers(plug::TransformStack &stack,
+                    const plug::Vec2d &position) const {
+  if (isSmall(box_->getSize().x) || isSmall(box_->getSize().y)) {
     return false;
   }
 

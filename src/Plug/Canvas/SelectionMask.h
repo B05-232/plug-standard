@@ -3,10 +3,8 @@
 
 #include <cstddef>
 
-namespace plug
-{
-class SelectionMask
-{
+namespace plug {
+class SelectionMask {
 public:
   virtual ~SelectionMask() = 0;
 

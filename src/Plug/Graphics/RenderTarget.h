@@ -15,8 +15,7 @@
 #include "Plug/Graphics/Texture.h"
 #include "Plug/Graphics/VertexArray.h"
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Framebuffer object with single color attachment (as texture) and
@@ -24,8 +23,7 @@ namespace plug
  * SFML and SDL will perform all the required magic by themselves)
  *
  */
-class RenderTarget
-{
+class RenderTarget {
 public:
   virtual ~RenderTarget(void) = default;
 
@@ -34,7 +32,7 @@ public:
    *
    * @param array
    */
-  virtual void draw(const VertexArray& array) = 0;
+  virtual void draw(const VertexArray &array) = 0;
 
   /**
    * @brief Draw vertex array with texture-based coloring
@@ -42,7 +40,7 @@ public:
    * @param array
    * @param texture
    */
-  virtual void draw(const VertexArray& array, const Texture& texture) = 0;
+  virtual void draw(const VertexArray &array, const Texture &texture) = 0;
 
   /**
    * @brief Fill color attachment with specified color and reset depth and

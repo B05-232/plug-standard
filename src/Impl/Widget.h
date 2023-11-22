@@ -14,8 +14,7 @@
 
 #include "Plug/Widget.h"
 
-enum Corner
-{
+enum Corner {
   TopLeft = 0,
   TopRight,
   BottomLeft,
@@ -26,32 +25,31 @@ enum Corner
  * @brief Usable widget
  *
  */
-class Widget : public plug::Widget
-{
+class Widget : public plug::Widget {
 public:
-  explicit Widget(const plug::LayoutBox& box);
-  Widget(const Widget& widget);
-  Widget& operator=(const Widget& widget);
+  explicit Widget(const plug::LayoutBox &box);
+  Widget(const Widget &widget);
+  Widget &operator=(const Widget &widget);
   ~Widget() override;
 
-  void draw(plug::TransformStack& stack, plug::RenderTarget& target) override;
+  void draw(plug::TransformStack &stack, plug::RenderTarget &target) override;
 
-  void onEvent(const plug::Event& event, plug::EHC& context) override;
+  void onEvent(const plug::Event &event, plug::EHC &context) override;
 
-  void onParentUpdate(const plug::LayoutBox& parent_box) override;
+  void onParentUpdate(const plug::LayoutBox &parent_box) override;
 
-  plug::LayoutBox&       getLayoutBox() override { return *box_; }
-  const plug::LayoutBox& getLayoutBox() const override { return *box_; }
-  void                   setLayoutBox(const plug::LayoutBox& box) override;
+  plug::LayoutBox &getLayoutBox() override { return *box_; }
+  const plug::LayoutBox &getLayoutBox() const override { return *box_; }
+  void setLayoutBox(const plug::LayoutBox &box) override;
 
 protected:
-  plug::Vec2d getCorner(Corner corner, const plug::TransformStack& stack) const;
+  plug::Vec2d getCorner(Corner corner, const plug::TransformStack &stack) const;
 
-  bool covers(plug::TransformStack& stack,
-              const plug::Vec2d&    position) const override;
+  bool covers(plug::TransformStack &stack,
+              const plug::Vec2d &position) const override;
 
 private:
-  plug::LayoutBox* box_;
+  plug::LayoutBox *box_;
 };
 
 #endif

@@ -14,14 +14,12 @@
 
 #include "Plug/Color.h"
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Palette of tool colors
  */
-class ColorPalette
-{
+class ColorPalette {
 public:
   /**
    * @brief Get active foreground color
