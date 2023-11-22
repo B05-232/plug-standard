@@ -30,7 +30,6 @@ struct Texture {
       : data((Color *)new Color[a_width * a_height]), width(a_width),
         height(a_height) {}
 
-
   /**
    * @brief Image data
    *
