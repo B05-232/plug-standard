@@ -113,7 +113,6 @@ private:
 
 inline VertexArray::VertexArray(PrimitiveType type, size_t size = 0)
     : m_type(type), m_size(size), m_capacity(std::max(size, 1ul)) {
-
   m_data = new Vertex[m_capacity];
 }
 
@@ -127,7 +126,6 @@ inline VertexArray::VertexArray(const VertexArray &other)
 
 inline VertexArray &VertexArray::operator=(const VertexArray &other) {
   if (this == &other) {
-
     return *this;
   }
 
@@ -168,7 +166,6 @@ inline void VertexArray::resize(size_t new_size) {
 
 inline void VertexArray::appendVertex(const Vertex &vertex) {
   if (m_size == m_capacity) {
-
     reserve(m_capacity * 2);
   }
   assert(m_size < m_capacity);
