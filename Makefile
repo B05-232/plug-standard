@@ -21,7 +21,9 @@ CWARN:=-Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wchar-subscripts\
 -Wno-old-style-cast -Wno-varargs -Werror
 
 INCFLAGS:=-I$(SRCDIR)
-CFLAGS:=-std=c++17 -fPIE $(CWARN) $(INCFLAGS)
+# TODO: Link with SDL2 as well
+LFLAGS  :=-lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS:=-std=c++17 -fPIE $(CWARN) $(INCFLAGS) $(LFLAGS)
 
 CFORMAT  :=clang-format
 FMTFLAGS :=--dry-run -Werror -ferror-limit=1
