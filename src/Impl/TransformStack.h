@@ -14,7 +14,7 @@
 
 #include "Plug/Math/TransformStack.h"
 
-class TransformStack : plug::TransformStack {
+class TransformStack : public plug::TransformStack {
 public:
   TransformStack(void)
       : m_stack(new plug::Transform[DefaultCapacity]), m_stackSize(1),
