@@ -1,4 +1,4 @@
-#include "Impl/Graphics/RenderTarget/SfmlRenderTarget/RenderTarget.h"
+#include "RenderTarget.h"
 
 static sf::Color getSFMLColor(const plug::Color &plug_color);
 static sf::Vector2f getSFMLVector2f(const plug::Vec2d &plug_vector);
