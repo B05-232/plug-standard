@@ -15,10 +15,8 @@
 #include "Plug/Math/Transform.h"
 #include "Plug/Math/Vec2d.h"
 
-namespace plug
-{
-class TransformStack
-{
+namespace plug {
+class TransformStack {
 public:
   TransformStack() {}
 
@@ -28,7 +26,7 @@ public:
    * \brief Enter a transform to the top of the stack and pushes the new
    * transform onto the top of the stack
    */
-  virtual void enter(const Transform& transform) = 0;
+  virtual void enter(const Transform &transform) = 0;
 
   /**
    * \brief Removes a transform from the top of the stack
@@ -43,12 +41,12 @@ public:
   /**
    * \brief Converts local position to on-screen position using top transform
    */
-  virtual Vec2d apply(const Vec2d& vec) const = 0;
+  virtual Vec2d apply(const Vec2d &vec) const = 0;
 
   /**
    * \brief Converts on-screen position to local position using top transform
    */
-  virtual Vec2d restore(const Vec2d& vec) const = 0;
+  virtual Vec2d restore(const Vec2d &vec) const = 0;
 };
 } // namespace plug
 

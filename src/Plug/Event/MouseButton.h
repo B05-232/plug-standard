@@ -12,14 +12,12 @@
 #ifndef __PLUG_EVENT_MOUSE_BUTTON_H
 #define __PLUG_EVENT_MOUSE_BUTTON_H
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Mouse button
  */
-enum class MouseButton
-{
+enum class MouseButton {
   Left,
   Right,
   Middle,
