@@ -12,15 +12,13 @@
 #ifndef __PLUG_GRAPHICS_PRIMITIVE_TYPE_H
 #define __PLUG_GRAPHICS_PRIMITIVE_TYPE_H
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Rendering primitive (defines how to interpret sequence of vertices)
  *
  */
-enum PrimitiveType
-{
+enum PrimitiveType {
   /**
    * @brief Draw vertices as individual points
    *

@@ -12,14 +12,12 @@
 #ifndef __PLUG_TOOL_CONTROL_STATE_H
 #define __PLUG_TOOL_CONTROL_STATE_H
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Current state of tool control button
  */
-enum class State
-{
+enum class State {
   Pressed,  /*!< Button is pressed */
   Released, /*!< Button is released */
 };
@@ -27,8 +25,7 @@ enum class State
 /**
  * @brief State of tool control
  */
-struct ControlState
-{
+struct ControlState {
   State state; /*!< State of tool control button */
 };
 

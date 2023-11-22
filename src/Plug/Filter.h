@@ -16,21 +16,19 @@
 #include "Plug/Plugin.h"
 #include "Plug/Widget.h"
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Interface for pixel filter plugin
  */
-class Filter : public Plugin
-{
+class Filter : public Plugin {
 public:
   /**
    * @brief Apply filter to canvas
    *
    * @param[inout] canvas	Target canvas
    */
-  virtual void applyFilter(Canvas& canvas) const = 0;
+  virtual void applyFilter(Canvas &canvas) const = 0;
 
   /**
    * @brief Retrieve filter configuration widget
@@ -38,7 +36,7 @@ public:
    * @return Widget instance of `nullptr` if filter does not require
    *         configuration
    */
-  virtual Widget* getWidget(void) = 0;
+  virtual Widget *getWidget(void) = 0;
 
   virtual ~Filter() override = default;
 };

@@ -16,32 +16,25 @@
 
 #include "Plug/Color.h"
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Array of colors (stored on the CPU)
  *
  */
-struct Texture
-{
-  Texture(size_t a_width, size_t a_height, const Color* a_data) :
-      data(a_data), width(a_width), height(a_height)
-  {
-  }
+struct Texture {
+  Texture(size_t a_width, size_t a_height, const Color *a_data)
+      : data(a_data), width(a_width), height(a_height) {}
 
-  Texture(size_t a_width, size_t a_height) :
-      data((Color*)new Color[a_width * a_height]),
-      width(a_width),
-      height(a_height)
-  {
-  }
+  Texture(size_t a_width, size_t a_height)
+      : data((Color *)new Color[a_width * a_height]), width(a_width),
+        height(a_height) {}
 
   /**
    * @brief Image data
    *
    */
-  const Color* data;
+  const Color *data;
 
   /**
    * @brief Image width (in pixels)

@@ -19,27 +19,25 @@
 #include "Plug/Tool/ControlState.h"
 #include "Plug/Widget.h"
 
-namespace plug
-{
+namespace plug {
 
 /**
  * @brief Interface for canvas tool plugin
  */
-class Tool : public Plugin
-{
+class Tool : public Plugin {
   /**
    * @brief Set active color palette
    *
    * @param[in] palette	New active color palette
    */
-  virtual void setColorPalette(ColorPalette& palette) = 0;
+  virtual void setColorPalette(ColorPalette &palette) = 0;
 
   /**
    * @brief Set active (currently edited) canvas
    *
    * @param[in] canvas	Currently edited canvas
    */
-  virtual void setActiveCanvas(Canvas&) = 0;
+  virtual void setActiveCanvas(Canvas &) = 0;
 
   /**
    * @brief Process action on main tool button
@@ -47,7 +45,7 @@ class Tool : public Plugin
    * @param[in] state	    State of button
    * @param[in] position	Position of cursor during action
    */
-  virtual void onMainButton(const ControlState& state, const Vec2d&) = 0;
+  virtual void onMainButton(const ControlState &state, const Vec2d &) = 0;
 
   /**
    * @brief Process action on secondary tool button
@@ -55,36 +53,36 @@ class Tool : public Plugin
    * @param[in] state	    State of button
    * @param[in] position	Position of cursor during action
    */
-  virtual void onSecondaryButton(const ControlState& state,
-                                 const Vec2d&        position) = 0;
+  virtual void onSecondaryButton(const ControlState &state,
+                                 const Vec2d &position) = 0;
 
   /**
    * @brief Process action on tool modifier button no. 1
    *
    * @param[in] state	    State of button
    */
-  virtual void onModifier1(const ControlState&) = 0;
+  virtual void onModifier1(const ControlState &) = 0;
 
   /**
    * @brief Process action on tool modifier button no. 2
    *
    * @param[in] state	    State of button
    */
-  virtual void onModifier2(const ControlState&) = 0;
+  virtual void onModifier2(const ControlState &) = 0;
 
   /**
    * @brief Process action on tool modifier button no. 3
    *
    * @param[in] state	    State of button
    */
-  virtual void onModifier3(const ControlState&) = 0;
+  virtual void onModifier3(const ControlState &) = 0;
 
   /**
    * @brief Process moving of cursor
    *
    * @param[in] position	New position of cursor
    */
-  virtual void onMove(const Vec2d& position) = 0;
+  virtual void onMove(const Vec2d &position) = 0;
 
   /**
    * @brief Confirm tool application
@@ -102,7 +100,7 @@ class Tool : public Plugin
    * @return Widget instance or `nullptr` if tool does not need preview or
    *         configuration
    */
-  virtual Widget* getWidget() = 0;
+  virtual Widget *getWidget() = 0;
 
   virtual ~Tool() override = default;
 };
