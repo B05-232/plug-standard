@@ -55,7 +55,7 @@ public:
    *
    * @return unsigned
    */
-  virtual unsigned getNativeHandle(void) const = 0;
+  virtual void setActive(bool active) = 0;
 };
 
 } // namespace plug

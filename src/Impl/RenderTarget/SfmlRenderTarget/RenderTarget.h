@@ -20,7 +20,7 @@ public:
 
   virtual void clear(plug::Color color) override;
 
-  virtual unsigned getNativeHandle(void) const override;
+  virtual void setActive(bool active) override;
 
 private:
   sf::RenderTarget &m_target;

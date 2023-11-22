@@ -34,7 +34,7 @@ void SfmlRenderTarget::clear(plug::Color color) {
   m_target.clear(getSFMLColor(color));
 }
 
-unsigned SfmlRenderTarget::getNativeHandle(void) const { return 0; }
+void SfmlRenderTarget::setActive(bool active) { m_target.setActive(active); }
 
 //=======================================================================
 
