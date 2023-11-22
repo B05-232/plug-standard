@@ -16,7 +16,7 @@
 #include "Plug/Graphics/VertexArray.h"
 
 namespace plug {
-  
+
 /**
  * @brief Framebuffer object with single color attachment (as texture) and
  * depth-stencil buffer (as RenderBuffer) (just use it as a window wrapper, both
