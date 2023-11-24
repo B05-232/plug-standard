@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-plug::SelectionMask::~SelectionMask() {}
-
 SelectionMask::SelectionMask(const size_t width, const size_t height)
     : width_(width), height_(height), data_(new bool[width * height]) {
   for (size_t it = 0; it < height_; it++) {
