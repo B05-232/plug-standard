@@ -16,12 +16,12 @@ SelectionMask::SelectionMask(const size_t width, const size_t height)
 SelectionMask::SelectionMask(const size_t width, const size_t height,
                              const plug::SelectionMask &init_mask)
     : SelectionMask(width, height) {
-  size_t min_width = std::min(width_, other.getWidth());
-  size_t min_height = std::min(width_, other.getWidth());
+  size_t min_width = std::min(width_, init_mask.getWidth());
+  size_t min_height = std::min(width_, init_mask.getWidth());
 
   for (size_t it = 0; it < min_height; it++) {
     for (size_t jt = 0; jt < min_width; jt++) {
-      data_[it * width_ + jt] = other.getPixel(jt, it);
+      data_[it * width_ + jt] = init_mask.getPixel(jt, it);
     }
   }
 }
