@@ -1,6 +1,10 @@
 #ifndef __IMPL_SFML_RENDER_TARGET_H
 #define __IMPL_SFML_RENDER_TARGET_H
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <cstdio>
+
 #include "Impl/Util/Sfml.h"
 #include "Plug/Graphics.h"
 

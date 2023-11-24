@@ -25,15 +25,13 @@ SelectionMask::SelectionMask(const size_t width, const size_t height,
 }
 
 bool SelectionMask::getPixel(size_t x, size_t y) const {
-  if (x >= width_ || y >= height_)
-    return false;
+  assert(x < width_ && y < height_);
 
   return data_[y * width_ + x];
 }
 
 void SelectionMask::setPixel(size_t x, size_t y, bool value) {
-  if (x >= width_ || y >= height_)
-    return;
+  assert(x < width_ && y < height_);
 
   data_[y * width_ + x] = value;
 }
