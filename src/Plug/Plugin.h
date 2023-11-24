@@ -44,7 +44,7 @@ public:
    */
   virtual const char *getTexturePath(void) const = 0;
 
-  virtual ~PluginData() = default;
+  virtual ~PluginData() {}
 };
 
 /**
