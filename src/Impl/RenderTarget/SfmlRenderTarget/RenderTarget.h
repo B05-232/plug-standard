@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include <cstdio>
 
+#include "Impl/Util/Sfml.h"
 #include "Plug/Graphics.h"
 
 class SfmlRenderTarget : public plug::RenderTarget {
