@@ -12,6 +12,7 @@
 #ifndef __PLUG_GRAPHICS_TEXTURE_H
 #define __PLUG_GRAPHICS_TEXTURE_H
 
+#include <cassert>
 #include <cstddef>
 
 #include "Plug/Color.h"
@@ -40,6 +41,16 @@ struct Texture {
   Texture &operator=(const Texture &other) = delete;
 
   ~Texture(void) { delete[] data; }
+
+  plug::Color &pixel(size_t x, size_t y) {
+    assert(x < width);
+    assert(y < height);
+    return data[y * width + x];
+  }
+
+  const Color &pixel(size_t x, size_t y) const {
+    return const_cast<Texture *>(this)->pixel(x, y);
+  }
 
   /**
    * @brief Image data
