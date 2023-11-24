@@ -41,7 +41,7 @@ private:
 
   void grow(void);
 
-  static const size_t DefaultCapacity;
+  static constexpr size_t DefaultCapacity = 16;
 
   plug::Transform *m_stack;
   size_t m_stackSize;
