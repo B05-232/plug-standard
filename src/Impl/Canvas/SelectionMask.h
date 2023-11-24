@@ -1,6 +1,8 @@
 #ifndef __IMPL_SELECTION_MASK_H
 #define __IMPL_SELECTION_MASK_H
 
+#include <cassert>
+
 #include "Plug/Canvas/SelectionMask.h"
 
 class SelectionMask : public plug::SelectionMask {
