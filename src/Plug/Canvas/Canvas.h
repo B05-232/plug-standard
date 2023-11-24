@@ -25,11 +25,6 @@ public:
                     const Texture &texture) = 0;
 
   /**
-   * \brief Get native handle of canvas' texture
-   */
-  virtual unsigned int getNativeHandle(void) const = 0;
-
-  /**
    * \brief Return sise of canvas
    */
   virtual Vec2d getSize(void) const = 0;
