@@ -42,14 +42,16 @@ struct Texture {
 
   ~Texture(void) { delete[] data; }
 
-  plug::Color &pixel(size_t x, size_t y) {
+  plug::Color getPixel(size_t x, size_t y) const {
     assert(x < width);
     assert(y < height);
     return data[y * width + x];
   }
 
-  const Color &pixel(size_t x, size_t y) const {
-    return const_cast<Texture *>(this)->pixel(x, y);
+  void setPixel(size_t x, size_t y, plug::Color color) const {
+    assert(x < width);
+    assert(y < height);
+    data[y * width + x] = color;
   }
 
   /**
