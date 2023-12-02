@@ -18,6 +18,8 @@ void SfmlEventManager::sendEvents(Widget *widget) {
 
   sf::Event sf_event;
   while (m_window.isOpen() && m_window.pollEvent(sf_event)) {
+    context.stopped = false;
+    context.overlapped = false;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wswitch-enum"
     switch (sf_event.type) {
