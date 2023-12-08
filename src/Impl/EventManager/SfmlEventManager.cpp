@@ -36,16 +36,16 @@ void SfmlEventManager::sendEvents(Widget *widget) {
       widget->onEvent(convertMouseReleased(sf_event), context);
       break;
     case sf::Event::KeyPressed:
-      widget->onEvent(convertKeyPressed(sf_event), context);
       m_shiftPressed = sf_event.key.shift;
       m_ctrlPressed = sf_event.key.control;
       m_altPressed = sf_event.key.alt;
+      widget->onEvent(convertKeyPressed(sf_event), context);
       break;
     case sf::Event::KeyReleased:
-      widget->onEvent(convertKeyReleased(sf_event), context);
       m_shiftPressed = sf_event.key.shift;
       m_ctrlPressed = sf_event.key.control;
       m_altPressed = sf_event.key.alt;
+      widget->onEvent(convertKeyReleased(sf_event), context);
       break;
     default:
       break;
