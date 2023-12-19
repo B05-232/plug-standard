@@ -33,8 +33,8 @@ void TransformStack::push(const plug::Transform &transform) {
 }
 
 void TransformStack::pop(void) {
-  m_stack[m_stackSize] = plug::Transform();
   --m_stackSize;
+  m_stack[m_stackSize] = plug::Transform();
 }
 
 void TransformStack::grow(void) {
@@ -46,6 +46,7 @@ void TransformStack::grow(void) {
     new_stack[i] = m_stack[i];
   }
 
+  delete[] m_stack;
   m_stack = new_stack;
   m_stackCapacity = new_capacity;
 }
